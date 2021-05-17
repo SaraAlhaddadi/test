@@ -21,6 +21,10 @@ padding: 1em;
 width: 80%;
 }
 
+h1{
+    color: brown;
+}
+
 .destination-container {
 display: flex;
 flex-flow: wrap;
