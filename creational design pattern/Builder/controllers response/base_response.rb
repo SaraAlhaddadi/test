@@ -1,0 +1,29 @@
+require_relative './statuses.rb'
+require_relative './response'
+class BaseResponse
+  include Statuses
+  attr_reader :response
+
+  def initialize
+    @response = Response.new
+  end
+
+  def etag!
+    @response.headers = @response.headers.merge('ETag' => ('a'..'z').to_a.sample(16).join)
+  end
+
+  def body=(body)
+    validate_body!(body)
+    @response.body = body
+  end
+
+  def content_type!
+    raise NotImplementedError
+  end
+
+  private
+
+  def validate_body!(body)
+    raise('Bad body: ' + body) if body.nil?
+  end
+end
